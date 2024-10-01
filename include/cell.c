@@ -2,13 +2,13 @@
 #define _CELL_H
 
 #include <stdio.h>
-#include "color.c"  // Include color definitions
+#include "color.c"  
 #include "user_settings.c"
 
 #define false 0
 #define true  1
 
-// Define different block characters for finer pixel control
+// These will be our blocks -- Basis of our "Pixels"
 #define FULL_BLOCK  "\u2588"  // Full block
 #define UPPER_BLOCK "\u2580"  // Upper half block
 #define LOWER_BLOCK "\u2584"  // Lower half block
@@ -18,12 +18,13 @@
 
 // Define the Pixel struct with color and block type
 typedef struct {
-    Color color;  // ANSI color
+    Color color;  // ANSI color, dont worry we have premade ones defined (RED, BLUE, etc)
     int isOn;     // Whether the pixel is on or off
-    char* blockType;  // Type of block (full, half, etc.)
+    char* blockType;  // Type of block (full, half, etc.), this can help create cool effects
 } Pixel;
 
-// Define a 4x4 cell of Pixels
+// Define a NxN cell of Pixels -- If you want to adjust these refer to the user_settings file, or just manually change them
+// (make sure to also change the for loops in the drawCell function if modified with literals)
 typedef Pixel cell[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 // Function to draw a single pixel with partial blocks
@@ -44,6 +45,35 @@ void drawCell(cell c) {
         printf(RESET "\n");  // Reset colors and move to the next row
     }
 }
+
+
+
+// constructors so we dont have to define every element of the pixel
+Pixel createFullBlockPixel(Color c, int isOn){
+  Pixel p;
+  p.isOn = isOn;
+  p.color = c;
+  p.blockType = FULL_BLOCK;
+  return p;
+}
+
+Pixel createPixelBlock(Color c, int isOn, char* blocktype){
+  Pixel p;
+  p.blockType = blocktype;
+  p.color = c;
+  p.isOn = isOn;
+  return p;
+}
+
+Pixel createPixel(Color c, char* blocktype){
+  Pixel p;
+  p.blockType = FULL_BLOCK;
+  p.color = c;
+  p.isOn = true;
+  return p;
+}
+
+
 
 #endif
 
