@@ -76,8 +76,8 @@ int main(void) {
         // Redraw the cell or update game logic here
         // Clear screen and draw updated cell
         clrscr();
-        // addLine(myCell, makeLine(makePoint(0, 1), makePoint(30, 1)), createPixel(createColor(RED), FULL_BLOCK));
-        addTriangle(myCell, makeTriangle(makePoint(0, 0), makePoint(25, 10), makePoint(40, 5)), createPixel(createColor(RED), FULL_BLOCK));
+        addTriangle(myCell, makeTriangle(makePoint(0, 0), makePoint(25, 10), makePoint(40, 5)), createPixel(createColor(BLUE), FULL_BLOCK));
+        addRectangle(myCell, makeRectangle(makePoint(5, 5), makePoint(10, 5)), createPixel(createColor(RED), FULL_BLOCK));
 
         drawCell(myCell);
         usleep(200000); // Sleep for a short time to control loop speed

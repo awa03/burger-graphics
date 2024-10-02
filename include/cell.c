@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shapes/line.c"
+#include "shapes/rectangle.c"
 #include "shapes/triangle.c"
 #include "color.c"  
 #include "user_settings.c"
@@ -170,6 +171,28 @@ void addTriangleFilled(cell c, Triangle t, Pixel pix){
 
   // #TODO: IMPLEMENT
 }
+
+void addRectangle(cell c, Rectangle s, Pixel pix) {
+    // Vector from p1 to p2
+    int dx = s.p2.x - s.p1.x;
+    int dy = s.p2.y - s.p1.y;
+
+    // Calculate the perpendicular vector (rotate by 90 degrees)
+    int perp_dx = -dy;
+    int perp_dy = dx;
+
+    // Calculate p3 and p4
+    Point p3 = makePoint(s.p1.x + perp_dx, s.p1.y + perp_dy);
+    Point p4 = makePoint(s.p2.x + perp_dx, s.p2.y + perp_dy);
+
+    // Draw the four sides of the Rectangle
+    addLine(c, makeLine(s.p1, s.p2), pix);  // Side 1: p1 -> p2
+    addLine(c, makeLine(s.p2, p4), pix);    // Side 2: p2 -> p4
+    addLine(c, makeLine(p4, p3), pix);      // Side 3: p4 -> p3
+    addLine(c, makeLine(p3, s.p1), pix);    // Side 4: p3 -> p1
+}
+
+
 
 #endif
 
