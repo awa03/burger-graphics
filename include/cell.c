@@ -43,7 +43,7 @@ void drawPixel(Pixel p) {
 
 // Function to draw the entire cell
 void drawCell(cell c) {
-  for (int i = SCREEN_HEIGHT - 1; i >= 0; i--) {  // Loop through rows, reversed
+  for (int i = 0;  i < SCREEN_HEIGHT; i++) {  // Loop through rows, reversed
     for (int j = 0; j < SCREEN_WIDTH; j++) {  // Loop through columns
       drawPixel(c[i][j]);  // Draw each pixel in the cell
     }
@@ -58,9 +58,6 @@ void initCell(cell c, Pixel pix){
     }
   }  
 }
-
-
-
 
 // constructors so we dont have to define every element of the pixel
 Pixel createFullBlockPixel(Color c, int isOn){
@@ -91,7 +88,7 @@ Pixel createPixelWithBG(Color c, Color bg, char* blocktype){
   Pixel p;
   p.blockType = FULL_BLOCK;
   p.color = c;
-  p.color = bg;
+  p.bg_color = bg;
   p.isOn = true;
   return p;
 }

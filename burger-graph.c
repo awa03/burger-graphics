@@ -1,5 +1,4 @@
 #include "include/cell.c"
-#include "include/shapes/line.c"
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
@@ -36,8 +35,8 @@ int main(void) {
     drawCell(myCell);
     drawCell(myCell);
 
-    int playerx = 2, playery = 4;
-    // myCell[playery][playerx] = createPixel(createColor(RED), FULL_BLOCK);
+    int playerx = 10, playery = 10;
+    myCell[playery][playerx] = createPixel(createColor(RED), FULL_BLOCK);
 
     // Enable non-blocking keyboard input
     enableRawMode();
@@ -72,7 +71,6 @@ int main(void) {
               }
         }
 
-        // myCell[playery][playerx] = createPixelBlock(createColor(RED_BG), true, " ");
 
         // Redraw the cell or update game logic here
         // Clear screen and draw updated cell
@@ -101,26 +99,29 @@ int main(void) {
         // AVOID USING EXPLICITLY -- ARTIFACTS CAUSED BY INCORRECT SETTING MAY OCCUR
         addRectangle4Filled(myCell, 
           makeRectangle4(
-            makePoint(10, 10),
-            makePoint(30, 10),
-            makePoint(10, 20),
-            makePoint(30, 20)
+            makePoint(10, 0),
+            makePoint(30, 0),
+            makePoint(10, 40),
+            makePoint(30, 40)
           ),
           createPixel(createColor(RED), FULL_BLOCK)
         );
 
         addRectangle4Filled(myCell, 
           makeRectangle4(
-            makePoint(0, 20),
-            makePoint(10, 20),
-            makePoint(0, 40),
-            makePoint(10, 40)
+            makePoint(10, 0),
+            makePoint(30, 0),
+            makePoint(10, 0),
+            makePoint(30, 0)
           ),
           createPixel(createColor(BLUE), FULL_BLOCK)
         );
 
+        // myCell[playery][playerx] = createPixelBlock(createColor(RED_BG), true, "A");
+        
+
         drawCell(myCell);
-        usleep(2000000000); // Sleep for a short time to control loop speed
+        usleep(20000000); // Sleep for a short time to control loop speed
     }
 
     // Reset terminal to normal mode before exiting
