@@ -27,3 +27,9 @@ into an interpretable format for our "game engine" to use.
 - Migration to ncurses, essentially repurposing the library
 - Other Graphics changes
 - Rendering method
+
+## Future Plans
+- [ ] Implement Line
+- [ ] Implement Box
+- [ ] Implement Circle
+- [ ] Implement UI For Menu's 
