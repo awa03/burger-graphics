@@ -3,7 +3,7 @@
 
 // ---- Touch this section for adjusting some settings
 #define SCREEN_WIDTH 43
-#define SCREEN_HEIGHT 12
+#define SCREEN_HEIGHT 30
 // --------------------------------------------------
 #endif
 

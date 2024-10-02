@@ -32,11 +32,12 @@ int main(void) {
     // Initialize cell
     cell myCell = {
     };
+    initCell(myCell, createPixel(createColor(BLACK), FULL_BLOCK));
     drawCell(myCell);
     drawCell(myCell);
 
     int playerx = 2, playery = 4;
-    myCell[playery][playerx] = createPixel(createColor(RED), FULL_BLOCK);
+    // myCell[playery][playerx] = createPixel(createColor(RED), FULL_BLOCK);
 
     // Enable non-blocking keyboard input
     enableRawMode();
@@ -44,11 +45,11 @@ int main(void) {
     char input;
     // game loop
     for (;;) {
-        myCell[playery][playerx] = createFullBlockPixel(createColor(YELLOW), false);
+        // myCell[playery][playerx] = createFullBlockPixel(createColor(YELLOW), false);
 
         // Safer Call -------------------------------------------------------------------- Bounded by size of arr
         // setPixel(myCell, makePoint(playerx, playery), createFullBlockPixel(createColor(YELLOW), false));
-        input = getchar(); // This will be non-blocking now
+        // input = getchar(); // This will be non-blocking now
 
         if (input == 'q') { // Press 'q' to quit the loop
             break;
@@ -76,11 +77,50 @@ int main(void) {
         // Redraw the cell or update game logic here
         // Clear screen and draw updated cell
         clrscr();
-        addTriangle(myCell, makeTriangle(makePoint(0, 0), makePoint(25, 10), makePoint(40, 5)), createPixel(createColor(BLUE), FULL_BLOCK));
-        addRectangle(myCell, makeRectangle(makePoint(5, 5), makePoint(10, 5)), createPixel(createColor(RED), FULL_BLOCK));
+
+        addTriangleFilled(myCell, 
+          makeTriangle(
+            makePoint(0, 0),
+            makePoint(15, 20),
+            makePoint(55, 25)
+          ),
+          createPixel(createColor(CYAN), FULL_BLOCK)
+        );
+
+        // ensure y is the same for proper usage, no checking incase on angle 
+        // tech makes a square but is rendered as a rec due to res, 
+        // make square will fix these issues 
+        addRectangleFilled(myCell, 
+          makeRectangle(
+            makePoint(1, 1),
+            makePoint(10, 1)
+          ), 
+          createPixel(createColor(YELLOW), FULL_BLOCK)
+        );
+
+        // AVOID USING EXPLICITLY -- ARTIFACTS CAUSED BY INCORRECT SETTING MAY OCCUR
+        addRectangle4Filled(myCell, 
+          makeRectangle4(
+            makePoint(10, 10),
+            makePoint(30, 10),
+            makePoint(10, 20),
+            makePoint(30, 20)
+          ),
+          createPixel(createColor(RED), FULL_BLOCK)
+        );
+
+        addRectangle4Filled(myCell, 
+          makeRectangle4(
+            makePoint(0, 20),
+            makePoint(10, 20),
+            makePoint(0, 40),
+            makePoint(10, 40)
+          ),
+          createPixel(createColor(BLUE), FULL_BLOCK)
+        );
 
         drawCell(myCell);
-        usleep(200000); // Sleep for a short time to control loop speed
+        usleep(2000000000); // Sleep for a short time to control loop speed
     }
 
     // Reset terminal to normal mode before exiting
