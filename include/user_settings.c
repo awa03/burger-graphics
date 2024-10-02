@@ -2,8 +2,8 @@
 #define _USER_SETTINGS_C
 
 // ---- Touch this section for adjusting some settings
-#define SCREEN_WIDTH 40
-#define SCREEN_HEIGHT 10
+#define SCREEN_WIDTH 42
+#define SCREEN_HEIGHT 12
 // --------------------------------------------------
 #endif
 
