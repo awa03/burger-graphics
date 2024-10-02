@@ -1,8 +1,10 @@
 #include "include/cell.c"
+#include "include/shapes/line.c"
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include "include/color.c"
 
 #define clrscr() printf("\e[1;1H\e[2J")
 
@@ -29,8 +31,8 @@ void disableRawMode() {
 int main(void) {
     // Initialize cell
     cell myCell = {
-        {{createColor(BLACK), true, FULL_BLOCK}}, {{createColor(BLACK), true, FULL_BLOCK}}
     };
+    drawCell(myCell);
     drawCell(myCell);
 
     int playerx = 2, playery = 4;
@@ -40,30 +42,45 @@ int main(void) {
     enableRawMode();
 
     char input;
+    // game loop
     for (;;) {
+        myCell[playery][playerx] = createFullBlockPixel(createColor(YELLOW), false);
 
-        myCell[playery][playerx] = createFullBlockPixel(createColor(RED), false);
+        // Safer Call -------------------------------------------------------------------- Bounded by size of arr
+        // setPixel(myCell, makePoint(playerx, playery), createFullBlockPixel(createColor(YELLOW), false));
         input = getchar(); // This will be non-blocking now
 
         if (input == 'q') { // Press 'q' to quit the loop
             break;
         } else if (input == 'w') { // Move player up
             // Logic to move player
-            playery--;
+            if(isValidY(playery - 1)){
+              playery--;
+            }
         } else if (input == 's') { // Move player down
-            playery++;
+            if(isValidY(playery + 1)){
+              playery++;
+            }
         } else if (input == 'a') { // Move player left
-            playerx--;
+            if(isValidX(playery - 1)){
+              playerx--;
+            }
         } else if (input == 'd') { // Move player right
-            playerx++;
+            if(isValidX(playery + 1)){
+                playerx++;
+              }
         }
 
-        myCell[playery][playerx] = createFullBlockPixel(createColor(RED), true);
+        // myCell[playery][playerx] = createPixelBlock(createColor(RED_BG), true, " ");
+
         // Redraw the cell or update game logic here
         // Clear screen and draw updated cell
         clrscr();
+        // addLine(myCell, makeLine(makePoint(0, 1), makePoint(30, 1)), createPixel(createColor(RED), FULL_BLOCK));
+        addTriangle(myCell, makeTriangle(makePoint(0, 0), makePoint(25, 10), makePoint(40, 5)), createPixel(createColor(RED), FULL_BLOCK));
+
         drawCell(myCell);
-        usleep(15000); // Sleep for a short time to control loop speed
+        usleep(200000); // Sleep for a short time to control loop speed
     }
 
     // Reset terminal to normal mode before exiting

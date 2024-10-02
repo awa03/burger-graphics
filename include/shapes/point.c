@@ -6,7 +6,15 @@ typedef struct {
   int y;
 } Point;
 
+// TODO: IMPLEMENT
+typedef struct {
+  int x; 
+  int y;
+  int z;
+} Point3;
+
 #define Vec2 Point
+#define Vec3 Point3
 
 Point makePoint(int x, int y){
   Point p;
