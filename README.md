@@ -22,3 +22,8 @@ from this library. This will eliminate unneeded portions for regular library use
 
 Another project that will be contained within this project will be an image to block converted. Essentially it will be able to convert a pixel art image (or any image, however it will be significantly downscaled)
 into an interpretable format for our "game engine" to use. 
+
+## Possible Changes to this Project
+- Migration to ncurses, essentially repurposing the library
+- Other Graphics changes
+- Rendering method
