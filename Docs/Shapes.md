@@ -109,6 +109,49 @@ I would stray away from using the explicit function because it is ironically mor
 makeTriangle(makePoint(1, 2), makePoint(3, 3), makePoint(5, 10));
 ```
 
+## Rectangle
+
+A rectangle is implemented in a similar way to the triangle. However we construct this through using
+`p1 -> p2`, `p2 -> p3`, `p3 -> p4`, `p4 -> p1`. An example of this can be seen below:
+
+```c
+#    #
+
+#    #
+```
+
+We can see that we have four points within the image above. We can understand `p1: (0,0)`, `p2: (5, 0)`, `p3: (5, 5)`, and `p4: (0, 5)`. 
+
+Now that we understand how the abstraction is being created we can introduce the usage, which can be seen below. 
+
+```c
+void addRectangle4(cell c, Rectangle4 s, Pixel pix);
+void addRectangle(cell c, Rectangle s, Pixel pix);
+```
+
+As you can see we have two types of rectangles. A rectangle 4 is created through the contructor `makeRectange4`, and a 2 pointed rectangle can be created using `makeRectangle`. The usage of which can be seen below.
+
+```c
+Rectangle makeRectangle(Point p1, Point p2);
+Rectangle4 makeRectangle4(Point p1, Point p2, Point p3, Point p4);
+```
+
+A rectangle only contains 2 points, making it more similar to a [line]() structure than a rectangle. This is because the other
+points can be derived from the original 2 points. However, if you wish to make a scewed version of a rectangle I have also implemented a 4 point variation. In fact the basis of the rectangle is the rectangle function. The two other points are calculated and applyed to make a rectangle4. 
+
+The implementations for adding your created rectangle can be seen below. 
+
+```c
+void addRectangle(cell c, Rectangle s, Pixel pix);
+void addRectangle4(cell c, Rectangle4 s, Pixel pix);
+```
+
+There is also another variation of this method that allows you to fill the area within. These can be seen below. 
+
+```c
+void addRectangleFilled(cell c, Rectangle s, Pixel pix);
+void addRectangle4Filled(cell c, Rectangle4 s, Pixel pix);
+```
 
 
 

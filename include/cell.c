@@ -311,9 +311,5 @@ void addRectangleFilled(cell c, Rectangle s, Pixel pix){
   addRectangle4Filled(c, makeRectangle4(s.p1, s.p2, p3, p4), pix);
 }
 
-
-
-
-
 #endif
 
